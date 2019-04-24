@@ -1,0 +1,2 @@
+# mindtree
+Declarative mind mapping
