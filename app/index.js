@@ -602,6 +602,4 @@ webix.ready(() =>
     });
 
     app.ui.chart = echarts.init($$('chart').getNode());
-
-    console.log(app.ui.chart._zr.painter);
 });
