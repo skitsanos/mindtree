@@ -237,7 +237,7 @@ const app = {
                 const screen_center = app.utils.getScreenCenter();
                 const win_print = window.open('', 'Print', `height=800,width=800,left=${screen_center.x - 400},top=${screen_center.y - 300}`);
 
-                win_print.document.write(`<html><head <style type="text/css">html,body{margin: 0}</style><title>${app.utils.getFileName(app.context.path)}</title>`);
+                win_print.document.write(`<html><head></head><style type="text/css">html,body{margin: 0}</style><link href="https://fonts.googleapis.com/css?family=Quicksand:300,400|Roboto" rel="stylesheet"><title>${app.utils.getFileName(app.context.path)}</title>`);
                 win_print.document.write('</head><body>');
                 win_print.document.write(cvs.outerHTML);
                 //win_print.document.write(`<img id="imageData" src="${dataUrl}"/>`);
@@ -250,13 +250,6 @@ const app = {
                 win_print.focus();
                 win_print.print();
                 win_print.close();
-
-                /*win_print.document.getElementById('imageData').addEventListener('load', () =>
-                {
-                    win_print.focus();
-                    win_print.print();
-                    win_print.close();
-                });*/
             }
         }
     },
