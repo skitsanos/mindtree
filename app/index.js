@@ -235,42 +235,29 @@ const app = {
             {
                 const dataUrl = cvs.toDataURL();
                 const screen_center = app.utils.getScreenCenter();
-                const mywindow = window.open('', 'Print', `height=800,width=800,left=${screen_center.x - 400},top=${screen_center.y - 300}`);
+                const win_print = window.open('', 'Print', `height=800,width=800,left=${screen_center.x - 400},top=${screen_center.y - 300}`);
 
-                mywindow.document.write(`<html><head><title>${app.utils.getFileName(app.context.path)}</title>`);
-                mywindow.document.write('</head><body>');
-                mywindow.document.write(`<img id="imageData" src="${dataUrl}"/>`);
-                mywindow.document.write('</body></html>');
-                mywindow.document.close();
+                win_print.document.write(`<html><head <style type="text/css">html,body{margin: 0}</style><title>${app.utils.getFileName(app.context.path)}</title>`);
+                win_print.document.write('</head><body>');
+                win_print.document.write(cvs.outerHTML);
+                //win_print.document.write(`<img id="imageData" src="${dataUrl}"/>`);
+                win_print.document.write('</body></html>');
+                win_print.document.close();
 
-                mywindow.document.getElementById('imageData').addEventListener('load', () =>
+                const c = win_print.document.getElementsByTagName('canvas')[0];
+                c.getContext('2d').drawImage(cvs, 0, 0);
+
+                win_print.focus();
+                win_print.print();
+                win_print.close();
+
+                /*win_print.document.getElementById('imageData').addEventListener('load', () =>
                 {
-                    mywindow.focus();
-                    mywindow.print();
-                    mywindow.close();
-                });
+                    win_print.focus();
+                    win_print.print();
+                    win_print.close();
+                });*/
             }
-            /*if (cvs !== undefined)
-            {
-                const dataUrl = document.getElementsByTagName('canvas')[0].toDataURL(); //attempt to save base64 string to server using this var
-
-                const win_print = gui.Window.open('app/printing.html', {position: 'center'}, (e) =>
-                {
-                    const w = e.window;
-                    w.addEventListener('load', () =>
-                    {
-                        const img = w.document.getElementById('imageData');
-
-                        img.addEventListener('load', () =>
-                        {
-                            w.print();
-                            w.close();
-                        });
-
-                        img.setAttribute('src', dataUrl);
-                    });
-                });
-            }*/
         }
     },
 
@@ -297,9 +284,6 @@ const app = {
                 series: [
                     {
                         type: 'tree',
-
-                        top: '18%',
-                        bottom: '14%',
 
                         label: {
                             position: 'right',
