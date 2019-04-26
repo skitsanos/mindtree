@@ -32,7 +32,15 @@ class MindmapParser
             }
             else
             {
-                item = {name: el};
+                if (typeof el === 'string')
+                {
+                    const words = el.split(/((?:\w*\W){5})/gmi).filter(Boolean).join('\n');
+                    item = {name: words};
+                }
+                else
+                {
+                    item = {name: el};
+                }
             }
 
             datadoc.children.push(item);
@@ -44,8 +52,6 @@ class MindmapParser
         try
         {
             const doc = YAML.parse(content, {prettyErrors: true});
-            //console.log(JSON.stringify(doc, null, 3));
-
             let datadoc = {name: Object.keys(doc)[0], children: []};
 
             this.parseElement(datadoc, Object.values(doc)[0][0]);
@@ -278,6 +284,11 @@ const app = {
                     {
                         type: 'tree',
 
+                        roam: true,
+
+                        left: '20%',
+                        right: '20%',
+
                         label: {
                             position: 'right',
                             verticalAlign: 'middle',
@@ -285,7 +296,7 @@ const app = {
                             color: '#fff',
                             lineHeight: 20,
                             padding: [3, 7, 3, 7],
-                            backgroundColor: '#6035',
+                            backgroundColor: '#6036',
                             borderRadius: 3,
                             shadowColor: '#666',
                             shadowBlur: 7,
@@ -293,10 +304,18 @@ const app = {
                             shadowOffsetY: 3
                         },
 
+                        leaves: {
+                            label: {
+                                color: '#fff',
+                                backgroundColor: '#6055'
+                            }
+                        },
+
                         lineStyle: {
                             curveness: 0.5
                         },
 
+                        symbol: 'diamond',
                         symbolSize: 10,
 
                         initialTreeDepth: -1,
@@ -570,20 +589,7 @@ webix.ready(() =>
                                 mode: 'yaml',
                                 id: 'editor',
                                 onChange: app.handlers.gotDirty
-                            }/*,
-                                {
-                                    height: 100,
-                                    rows: [
-                                        {
-                                            template: '<span class="mdi mdi-card-text-outline"></span>Log',
-                                            autoheight: true
-                                        },
-                                        {
-                                            view: 'textarea',
-                                            id: 'log'
-                                        }
-                                    ]
-                                }*/
+                            }
                         ]
                     },
                     {view: 'resizer'},
