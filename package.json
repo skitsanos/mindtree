@@ -1,0 +1,50 @@
+{
+  "name": "mindtree",
+  "description": "Declarative Mindmapping",
+  "version": "1.1.11",
+  "chromium-args": "--mixed-context",
+  "main": "app/index.html",
+  "window": {
+    "toolbar": false,
+    "width": 1200,
+    "height": 800
+  },
+  "dependencies": {
+    "yaml": "^1.5.0"
+  },
+  "devDependencies": {
+    "nwjs-builder-phoenix": "^1.15.0"
+  },
+  "build": {
+    "appId": "com.skitsanos.apps.mindtree",
+    "nwVersion": "0.37.2",
+    "ffmpegIntegration": false,
+    "excludes": [
+      "package-lock.json",
+      "test/*"
+    ],
+    "packed": true,
+    "targets": [
+      "zip"
+    ],
+    "mac": {
+      "name": "Mindtree",
+      "displayName": "Mindtree",
+      "copyright": "Copyright © 2019, Skitsanos Inc.",
+      "icon": "./assets/tree.icns",
+      "plistStrings": {
+        "CFBundleIdentifier": "com.skitsanos.apps.Mindtree",
+        "CFBundleDocumentTypes": []
+      }
+    },
+    "win": {
+      "productName": "Mindtree",
+      "companyName": "Skitsanos Inc.",
+      "copyright": "Copyright © 2019, Skitsanos Inc.",
+      "icon": "./assets/tree.ico"
+    }
+  },
+  "scripts": {
+    "build": "build --tasks mac-x64,win-x64 --mirror https://dl.nwjs.io/ ."
+  }
+}
