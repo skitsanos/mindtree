@@ -42,9 +42,15 @@
       "companyName": "Skitsanos Inc.",
       "copyright": "Copyright © 2019, Skitsanos Inc.",
       "icon": "./assets/tree.ico"
+    },
+    "linux": {
+      "productName": "Mindtree",
+      "companyName": "Skitsanos Inc.",
+      "copyright": "Copyright © 2019, Skitsanos Inc.",
+      "icon": "./assets/tree.ico"
     }
   },
   "scripts": {
-    "build": "build --tasks mac-x64,win-x64 --mirror https://dl.nwjs.io/ ."
+    "build": "build --tasks mac-x64,win-x64,linux-x64 --mirror https://dl.nwjs.io/ ."
   }
 }
